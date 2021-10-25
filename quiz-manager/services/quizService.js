@@ -13,4 +13,19 @@ function getAllQuizzes(onSuccess) {
     db.query(sql, onSuccess);
   }
 
+// function getAllQuestions() {
+//     const sql = "SELECT * FROM `questions`";
+//     const preparedSql = mysql.format(sql);
+//     db.query(preparedSql);
+//   }
+
+function getAllQuestionsUsingQuizId(id, onSuccess) {
+    const sql = "SELECT * FROM `questions` WHERE `quizid` = (?)";
+    const inserts = [id];
+    const preparedSql = mysql.format(sql, inserts);
+    db.query(preparedSql, onSuccess);
+}
+
 module.exports.getAllQuizzes = getAllQuizzes;
+// module.exports.getAllQuestions = getAllQuestions; 
+module.exports.getAllQuestionsUsingQuizId = getAllQuestionsUsingQuizId;  

@@ -19,10 +19,8 @@ const quizService = require("../services/quizService");
   router.get('/', passport.authenticate('jwt', { session: false }), function(req, res, next) {
     function onSuccess(quizzes) {
         res.render('quizzes/index', {
-            quizzes: quizzes
-            // isAdmin: req.user.role === "admin",
-            // isRead: req.user.role === "read",
-            // isRestricted: req.user.role === "restricted"
+            quizzes: quizzes,
+            isRestricted: req.user.role === "restricted"
         });
     }
 

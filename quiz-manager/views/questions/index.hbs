@@ -1,0 +1,16 @@
+<h1>View Questions</h1>
+
+<h1>All Questions</h1>
+  {{#each questions}}
+  <table>
+    <tr>
+      <td>{{this.id}}.</td>
+      <td>{{this.question}}</td>
+      <td>
+        {{!-- <form action="/questions/{{this.id}}/" method="GET">
+          <button type="submit">View</button>
+        </form> --}}
+      </td>
+    </tr>
+</table>
+{{/each}}
