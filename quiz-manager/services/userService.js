@@ -33,6 +33,25 @@ function validateLogin(user, onSuccess) {
     db.query(preparedSql, onFindingUser);
 }
 
+function findUser(username, onSuccess) {
+    var sql = "SELECT * FROM `users` WHERE username = ?";
+    var inserts = [username];
+    var preparedSql = mysql.format(sql, inserts);
+
+    // React to query
+    function onResult(result) {
+        console.log('This is the result', result)
+        if (result && result.length > 0) {
+            onSuccess(null, result[0])
+        }
+        // else onSuccess("No such user", null)
+        else onSuccess("No such user", null)
+    };
+    db.query(preparedSql, onResult);
+    console.log('End of findUser')
+}
+
 
 module.exports.createUser = createUser;
 module.exports.validateLogin = validateLogin;
+module.exports.findUser = findUser;
