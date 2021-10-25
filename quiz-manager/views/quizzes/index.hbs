@@ -1,1 +1,14 @@
 <h1>quiz index</h1>
+  {{#each quizzes}}
+  <table>
+    <tr>
+      <td>{{this.id}}</td>
+      <td>{{this.title}}</td>
+      <td>
+        <form action="/questions/{{this.id}}/" method="GET">
+          <button type="submit">View</button>
+        </form>
+      </td>
+    </tr>
+</table>
+{{/each}}

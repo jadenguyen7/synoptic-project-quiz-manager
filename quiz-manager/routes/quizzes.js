@@ -4,9 +4,9 @@ var passport = require('passport');
 var { editAccess, viewAccess, restrictedAccess } = require('../security/access');
 const quizService = require("../services/quizService");
 
-router.get('/', passport.authenticate('jwt', { session: false }), function(req, res, next) {
-    res.render('quizzes/index');
-});
+// router.get('/', passport.authenticate('jwt', { session: false }), function(req, res, next) {
+//     res.render('quizzes/index');
+// });
 
 // router.post('/', passport.authenticate('jwt', { session: false }), restrictedAccess, function(req, res, next) {
 //     // res.render('quiz/index');
@@ -16,17 +16,17 @@ router.get('/', passport.authenticate('jwt', { session: false }), function(req, 
 // });
 
 // get all quizzes
-//   router.get('/', passport.authenticate('jwt', { session: false }), function(req, res, next) {
-//     function onSuccess(quizzes) {
-//         res.render('quizzes/index', {
-//             quizzes: quizzes,
-//             isAdmin: req.user.role === "admin",
-//             isRead: req.user.role === "read",
-//             isRestricted: req.user.role === "restricted"
-//         });
-//     }
+  router.get('/', passport.authenticate('jwt', { session: false }), function(req, res, next) {
+    function onSuccess(quizzes) {
+        res.render('quizzes/index', {
+            quizzes: quizzes
+            // isAdmin: req.user.role === "admin",
+            // isRead: req.user.role === "read",
+            // isRestricted: req.user.role === "restricted"
+        });
+    }
 
-//     quizService.getAllQuizzes(onSuccess);
-// });
+    quizService.getAllQuizzes(onSuccess);
+});
 
 module.exports = router;
