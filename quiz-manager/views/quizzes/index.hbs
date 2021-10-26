@@ -13,3 +13,11 @@
     </tr>
 </table>
 {{/each}}
+
+{{#if isEdit}}
+
+  <form action="/quizzes/create/" method="GET">
+    <button type="submit">Create New Quiz</button>
+  </form>
+
+{{/if}}

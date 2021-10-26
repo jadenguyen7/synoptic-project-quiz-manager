@@ -1,14 +1,14 @@
 var express = require('express');
 var router = express.Router();
 var passport = require('passport');
-var { adminAccess, readAccess, restrictedAccess } = require('../security/access');
+var { adminAccess, readAccess, restrictedAccess } = require('../security/access'); // NOT SURE NEED THIS
 const quizService = require("../services/quizService");
 
 //get questions for quiz
 router.get('/:id', passport.authenticate('jwt', { session: false }), function(req, res, next) {
-    function onSuccess(questions) {
+    function onSuccess(sqlResult) {
         res.render('questions/index', {
-            questions: questions,
+            questions: sqlResult,
             isRestricted: req.user.role === "restricted",
             isView: req.user.role === "view",
             isEdit: req.user.role === "edit"

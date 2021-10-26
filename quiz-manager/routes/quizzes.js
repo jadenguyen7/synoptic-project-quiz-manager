@@ -17,14 +17,26 @@ const quizService = require("../services/quizService");
 
 // get all quizzes
   router.get('/', passport.authenticate('jwt', { session: false }), function(req, res, next) {
-    function onSuccess(quizzes) {
+    function onSuccess(sqlResult) {
         res.render('quizzes/index', {
-            quizzes: quizzes,
-            isRestricted: req.user.role === "restricted"
+            quizzes: sqlResult,
+            isEdit: req.user.role === "edit"
         });
     }
 
     quizService.getAllQuizzes(onSuccess);
+});
+
+// create new quiz
+router.get('/create', passport.authenticate('jwt', { session: false }), function(req, res, next) {
+    function onSuccess(sqlResult) {
+        res.render('quizzes/create', {
+            quizzes: sqlResult,
+            isEdit: req.user.role === "edit"
+        });
+    }
+
+    quizService.createQuiz(onSuccess);
 });
 
 module.exports = router;

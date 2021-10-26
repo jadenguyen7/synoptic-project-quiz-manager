@@ -1,0 +1,49 @@
+<h1>View Questions and Answers</h1>
+<table>
+  <thead>
+    <th>ID</th>
+    <th>Question</th>
+    <th>Answer</th>
+    <th>Correct answer |</th>
+    <th>Question id:</th>
+  </thead>
+
+{{#if isView}}
+
+  {{#each result}}
+
+    <tr>
+      <td>{{this.id}}.</td>
+      <td>{{this.question}}</td>
+      <td>{{this.answer}}</td>
+      <td>{{this.correct}}</td>
+      <td>{{this.questionid}}</td>
+    </tr>
+
+{{/each}}
+
+{{else}}
+
+  {{#each result}}
+
+    <tr>
+      <td>{{this.id}}.</td>
+      <td>{{this.question}}</td>
+      <td>{{this.answer}}</td>
+      <td>{{this.correct}}</td>
+      <td>{{this.questionid}}</td>
+      <td>
+        <form action="/answers/{{this.id}}/edit" method="GET">
+          <button type="submit">Edit</button>
+        </form>
+      </td>
+      <td>
+        <form action="/answers/{{this.id}}/delete" method="GET">
+          <button type="submit" onClick="return confirm('Are you sure you want to delete?')">Delete</button>
+        </form>
+      </td>
+    </tr>
+
+{{/each}}
+{{/if}}
+</table>
