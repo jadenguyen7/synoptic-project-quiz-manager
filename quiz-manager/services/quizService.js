@@ -1,11 +1,11 @@
 var mysql = require('mysql2');
 var db = require('../db');
 
-function createQuiz(quiz) {
-    const sql = "INSERT INTO `quizzes` (name) VALUES (?)";
-    const inserts = [quiz.name];
+function createQuiz(quiz, onSuccess) {
+    const sql = "INSERT INTO `quizzes` (title) VALUES (?)";
+    const inserts = [quiz.title];
     const preparedSql = mysql.format(sql, inserts);
-    return db.query(preparedSql);
+    return db.query(preparedSql, onSuccess);
 }
 
 function getAllQuizzes(onSuccess) {
@@ -19,12 +19,6 @@ function getQuestionsAndAnswersWithQuizId(id, onSuccess) {
     const preparedSql = mysql.format(sql, inserts);
     db.query(preparedSql, onSuccess);
 }
-
-// function getAllQuestions() {
-//     const sql = "SELECT * FROM `questions`";
-//     const preparedSql = mysql.format(sql);
-//     db.query(preparedSql);
-//   }
 
 function getAllQuestionsUsingQuizId(id, onSuccess) {
     const sql = "SELECT * FROM `questions` WHERE `quizid` = (?)";
