@@ -1,9 +1,9 @@
-{{#if isRestricted}}
+
 <h1>All Quizzes</h1>
   {{#each quizzes}}
   <table>
     <tr>
-      <td>{{this.id}}.</td>
+      <td>{{this.id}}</td>
       <td>{{this.title}}</td>
       <td>
         <form action="/questions/{{this.id}}/" method="GET">
@@ -13,4 +13,3 @@
     </tr>
 </table>
 {{/each}}
-{{/if}}

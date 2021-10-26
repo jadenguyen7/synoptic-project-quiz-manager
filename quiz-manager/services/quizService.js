@@ -11,7 +11,14 @@ var db = require('../db');
 function getAllQuizzes(onSuccess) {
     const sql = "SELECT * FROM `quizzes`";
     db.query(sql, onSuccess);
-  }
+}
+
+function getQuizWithId(id, onSuccess) {
+    const sql = "SELECT * FROM `quizzes` WHERE `id` = (?)";
+    const inserts = [id];
+    const preparedSql = mysql.format(sql, inserts);
+    db.query(preparedSql, onSuccess);
+}
 
 // function getAllQuestions() {
 //     const sql = "SELECT * FROM `questions`";
@@ -27,5 +34,6 @@ function getAllQuestionsUsingQuizId(id, onSuccess) {
 }
 
 module.exports.getAllQuizzes = getAllQuizzes;
+module.exports.getQuizWithId = getQuizWithId;
 // module.exports.getAllQuestions = getAllQuestions; 
 module.exports.getAllQuestionsUsingQuizId = getAllQuestionsUsingQuizId;  

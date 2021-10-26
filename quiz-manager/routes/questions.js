@@ -8,10 +8,13 @@ const quizService = require("../services/quizService");
 router.get('/:id', passport.authenticate('jwt', { session: false }), function(req, res, next) {
     function onSuccess(questions) {
         res.render('questions/index', {
-            questions: questions
+            questions: questions,
+            isRestricted: req.user.role === "restricted",
+            isView: req.user.role === "view",
+            isEdit: req.user.role === "edit"
         });
     }
-
+    
     quizService.getAllQuestionsUsingQuizId(req.params.id, onSuccess);
 });
 
