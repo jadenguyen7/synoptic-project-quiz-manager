@@ -1,0 +1,8 @@
+<h1>Create a new answer</h1>
+
+<p>{{questions.0.quizid}}</p>
+<form action="/answers/{{questions.0.quizid}}/create" method="POST">
+    <input type="text" placeholder="New question" name="title">
+    <input type="text" placeholder="quizid" value={{questions.0.quizid}} >
+    <button type="submit">Submit</button>
+</form>

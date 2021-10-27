@@ -1,21 +1,55 @@
-<h1>View Questions</h1>
+<h1>All {{quizTitle}} Questions</h1>
 
-{{#if isRestricted}}
-<h1>All {{quizName.title}} Questions</h1>
+{{#if isEdit}}
+<table>
+    <thead>
+    <th>ID</th>
+    <th>Question</th>
+    <th>Quiz ID</th>
+  </thead>
   {{#each questions}}
-  <table>
     <tr>
       <td>{{this.id}}.</td>
       <td>{{this.question}}</td>
+      <td>{{this.quizid}}</td>
+      <td>
+        <form action="/answers/{{this.id}}/" method="GET">
+          <button type="submit">Answers</button>
+        </form>
+      </td>
+      <td>
+        <form action="/questions/{{this.id}}/edit" method="GET">
+          <button type="submit">Edit</button>
+        </form>
+      </td>
+      <td>
+        <form action="/questions/{{this.id}}/delete" method="POST">
+          <button type="submit" onClick="return confirm('Are you sure you want to delete?')">Delete</button>
+        </form>
+      </td>
     </tr>
+
+  {{/each}}
 </table>
-{{/each}}
 
-{{else}}
+<br> 
+<p>{{questions.0.quizid}}</p>
 
-<h1>All {{quizName.title}} Questions</h1>
+    <form action="/questions/{{questions.0.quizid}}/create/" method="GET">
+    <button type="submit">Create New Question</button>
+    </form>
+
+
+{{/if}}
+
+
+{{#if isView}}
+<table>
+    <thead>
+    <th>ID</th>
+    <th>Question</th>
+  </thead>
   {{#each questions}}
-  <table>
     <tr>
       <td>{{this.id}}.</td>
       <td>{{this.question}}</td>
@@ -25,6 +59,22 @@
         </form>
       </td>
     </tr>
+  {{/each}}
 </table>
-{{/each}}
 {{/if}}
+
+
+{{#if isRestricted}}
+<table>
+  {{#each questions}}
+    <tr>
+      <td>{{this.id}}.</td>
+      <td>{{this.question}}</td>
+    </tr>
+    {{/each}}
+</table>
+{{/if}}
+
+<br>
+
+<a href='/quizzes'>Click to go back</a>

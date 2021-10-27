@@ -1,7 +1,42 @@
-
 <h1>All Quizzes</h1>
+
+{{#if isEdit}}
+<table>
   {{#each quizzes}}
-  <table>
+    <tr>
+      <td>{{this.id}}</td>
+      <td>{{this.title}}</td>
+      <td>
+        <form action="/questions/{{this.id}}/" method="GET">
+          <button type="submit">View</button>
+        </form>
+      </td>
+      {{!-- <td>
+        <form action="/quizzes/{{this.id}}/edit" method="GET">
+          <button type="submit">Edit</button>
+        </form>
+      </td> --}}
+      <td>
+        <form action="/quizzes/{{this.id}}/delete" method="POST">
+          <button type="submit" onClick="return confirm('Are you sure you want to delete?')">Delete</button>
+        </form>
+      </td>
+    </tr>
+
+  {{/each}}
+</table>
+
+<br>
+<form action="/quizzes/create/" method="GET">
+  <button type="submit">Create New Quiz</button>
+</form>
+
+
+{{else}}
+
+<table>
+  {{#each quizzes}}
+
     <tr>
       <td>{{this.id}}</td>
       <td>{{this.title}}</td>
@@ -11,13 +46,8 @@
         </form>
       </td>
     </tr>
-</table>
-{{/each}}
-
-{{#if isEdit}}
-
-  <form action="/quizzes/create/" method="GET">
-    <button type="submit">Create New Quiz</button>
-  </form>
-
+  {{/each}}
+</table>  
 {{/if}}
+
+

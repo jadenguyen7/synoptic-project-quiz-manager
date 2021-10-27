@@ -2,7 +2,8 @@ var express = require('express');
 var router = express.Router();
 var userService = require("../services/userService");
 require("dotenv").config()
-var jwt = require('jsonwebtoken')
+var jwt = require('jsonwebtoken');
+const { token } = require('morgan');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -31,5 +32,14 @@ router.post('/login', function(req, res, next) {
 
   userService.validateLogin(req.body, onSuccess)
 });
+
+// users/logout
+router.get('/logout', function(req, res, next) {
+  req.session = null;
+  res.clearCookie(req.cookie);
+  req.logout();
+  res.redirect('/');
+});
+
 
 module.exports = router; 

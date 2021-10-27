@@ -5,7 +5,14 @@ function createQuiz(quiz, onSuccess) {
     const sql = "INSERT INTO `quizzes` (title) VALUES (?)";
     const inserts = [quiz.title];
     const preparedSql = mysql.format(sql, inserts);
-    return db.query(preparedSql, onSuccess);
+    db.query(preparedSql, onSuccess);
+}
+
+function deleteQuiz(id, onSuccess) {
+    const sql = "DELETE FROM `quizzes` WHERE `id` = (?)";
+    const inserts = [id];
+    const preparedSql = mysql.format(sql, inserts);
+    db.query(preparedSql, onSuccess);
 }
 
 function getAllQuizzes(onSuccess) {
@@ -14,20 +21,14 @@ function getAllQuizzes(onSuccess) {
 }
 
 function getQuestionsAndAnswersWithQuizId(id, onSuccess) {
-    const sql = "SELECT * FROM `quizzes` JOIN `questions` ON `questions`.`quizid` = `quizzes`.`id` JOIN `answers` ON `answers`.`questionid` = `questions`.`id` WHERE `quizzes`.`id` = (?)";
-    const inserts = [id];
-    const preparedSql = mysql.format(sql, inserts);
-    db.query(preparedSql, onSuccess);
-}
-
-function getAllQuestionsUsingQuizId(id, onSuccess) {
-    const sql = "SELECT * FROM `questions` WHERE `quizid` = (?)";
+    const sql = "SELECT * FROM `quizzes` JOIN `questions` ON `questions`.`quizid` = `quizzes`.`id` JOIN `answers` ON `answers`.`questionid` = `questions`.`id` WHERE `questions`.`id` = (?)";
     const inserts = [id];
     const preparedSql = mysql.format(sql, inserts);
     db.query(preparedSql, onSuccess);
 }
 
 module.exports.createQuiz = createQuiz; 
+module.exports.deleteQuiz = deleteQuiz; 
 module.exports.getAllQuizzes = getAllQuizzes;
 module.exports.getQuestionsAndAnswersWithQuizId = getQuestionsAndAnswersWithQuizId;
-module.exports.getAllQuestionsUsingQuizId = getAllQuestionsUsingQuizId;  
+

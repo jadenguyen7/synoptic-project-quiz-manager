@@ -1,17 +1,17 @@
-<h1>View Questions and Answers</h1>
+<h1>Question and Answers</h1>
 <table>
   <thead>
     <th>ID</th>
     <th>Question</th>
     <th>Answer</th>
-    <th>Correct answer |</th>
-    <th>Question id:</th>
+    <th>Correct answer</th>
+    <th>Question ID</th>
   </thead>
 
 {{#if isView}}
 
   {{#each result}}
-
+  <tbody>
     <tr>
       <td>{{this.id}}.</td>
       <td>{{this.question}}</td>
@@ -19,13 +19,13 @@
       <td>{{this.correct}}</td>
       <td>{{this.questionid}}</td>
     </tr>
-
+  </tbody>
 {{/each}}
 
 {{else}}
 
   {{#each result}}
-
+  <tbody>
     <tr>
       <td>{{this.id}}.</td>
       <td>{{this.question}}</td>
@@ -43,7 +43,16 @@
         </form>
       </td>
     </tr>
-
+</tbody>
 {{/each}}
 {{/if}}
 </table>
+
+    <form action="/answers/{{questions.0.questionid}}/create/" method="GET">
+    <button type="submit">Create New Answer</button>
+    </form>
+
+
+<br>
+
+{{!-- <a href='/questions/{{quizid}}/'>Click to go back</a> --}}
