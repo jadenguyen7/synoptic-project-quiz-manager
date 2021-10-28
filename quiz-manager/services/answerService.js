@@ -8,6 +8,13 @@ function getAllAnswersByQuestionId(questionID, onSuccess) {
     db.query(preparedSql, onSuccess);
 }
 
+function createAnswer(id, answer, correct, questionid, onSuccess) {
+    const sql = "INSERT INTO `answers` (`answer`, `correct`, `questionid`) VALUES (?, ?, ?)";
+    const inserts = [id, answer, correct, questionid];
+    const preparedSql = mysql.format(sql, inserts);
+    db.query(preparedSql, onSuccess);
+}
+
 
 module.exports.getAllAnswersByQuestionId = getAllAnswersByQuestionId;  
-// module.exports.getAllAnswers = getAllAnswers;  
+module.exports.createAnswer = createAnswer;  

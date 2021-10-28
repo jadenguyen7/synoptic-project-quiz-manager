@@ -1,4 +1,8 @@
+DROP TABLE IF EXISTS `quizmanager`.`answers`;
+DROP TABLE IF EXISTS `quizmanager`.`questions`;
+DROP TABLE IF EXISTS `quizmanager`.`quizzes`;
 DROP TABLE IF EXISTS `quizmanager`.`users`;
+
 CREATE TABLE `quizmanager`.`users` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `username` VARCHAR(100) NOT NULL,
@@ -12,7 +16,7 @@ CREATE TABLE `quizmanager`.`quizzes` (
   `title` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`id`));
 
-DROP TABLE IF EXISTS `quizmanager`.`questions`;
+
 CREATE TABLE `quizmanager`.`questions` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `question` VARCHAR(255) NOT NULL,
@@ -20,17 +24,14 @@ CREATE TABLE `quizmanager`.`questions` (
   PRIMARY KEY (`id`),
   FOREIGN KEY (`quizid`) REFERENCES `quizmanager`.`quizzes` (`id`));
 
-DROP TABLE IF EXISTS `quizmanager`.`answers`;
+
 CREATE TABLE `quizmanager`.`answers` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `answer` VARCHAR(255) NOT NULL,
   `correct` BOOLEAN,
   `questionid` INT NULL,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`questionid`) REFERENCES `quizmanager`.`questions` (`id`) ON DELETE CASCADE);
-  
--- CREATE UNIQUE INDEX `answer_idx` ON `quizmanager`.`answers` (`answer`(1));
--- DROP INDEX `answer_idx` ON `quizmanager`.`answers`;
 
 INSERT INTO `quizmanager`.`quizzes`
 (`id`,

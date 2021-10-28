@@ -19,22 +19,23 @@ router.get('/:id', passport.authenticate('jwt', { session: false }), viewAccess,
     console.log(req.params.id);
 });
 
-router.get('/:quizid/create', passport.authenticate('jwt', { session: false }), editAccess, function(req, res, next) {
+// create new answer
+router.get('/:questionid/create', passport.authenticate('jwt', { session: false }), editAccess, function(req, res, next) {
     function onSuccess(sqlResult) {
         res.render('answers/create', {
-            questions: sqlResult,
-            quizID: sqlResult.quizid
+            answer: sqlResult,
+            question: sqlResult[0].question,
         });
     }
-    questionService.getAllAnswersByQuestionId(req.params.quizid, onSuccess);
+    answerService.getAllAnswersByQuestionId(req.params.questionid, onSuccess);
 });
 
-router.post('/:quizid/create', passport.authenticate('jwt', { session: false }), editAccess, function(req, res, next) {
-    console.log(req);
+router.post('/:questionid/create', passport.authenticate('jwt', { session: false }), editAccess, function(req, res, next) {
     function onSuccess() {
-        res.redirect(`/answers/${req.params.quizid}`);
+        res.redirect(`/answers/${req.params.questionid}`);
     }
-    questionService.createQuestion(req.body.title, req.params.quizid, onSuccess);
+    answerService.createAnswer(req.body.id, req.body.answer, req.body.correct, req.params.questionid, onSuccess);
+
 });
 
 

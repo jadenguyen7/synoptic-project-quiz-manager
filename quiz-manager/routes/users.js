@@ -35,8 +35,8 @@ router.post('/login', function(req, res, next) {
 
 // users/logout
 router.get('/logout', function(req, res, next) {
+  res.clearCookie('token');  
   req.session = null;
-  res.clearCookie(req.cookie);
   req.logout();
   res.redirect('/');
 });

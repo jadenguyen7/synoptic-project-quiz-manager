@@ -27,8 +27,6 @@ router.get('/:id', passport.authenticate('jwt', { session: false }), function(re
 //create new question 
 router.get('/:quizid/create', passport.authenticate('jwt', { session: false }), editAccess, function(req, res, next) {
     function onSuccess(sqlResult) {
-        // var quizid = sqlResult[0].quizid
-        // console.log(sqlResult);
         res.render('questions/create', {
             questions: sqlResult,
             quizID: sqlResult.quizid
