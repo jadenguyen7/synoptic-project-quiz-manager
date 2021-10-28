@@ -1,3 +1,5 @@
+<div class="quizContent">
+
 <h1>Question and Answers</h1>
 <table>
   <thead>
@@ -22,7 +24,9 @@
   </tbody>
 {{/each}}
 
-{{else}}
+{{/if}}
+
+{{#if isEdit}}
 
   {{#each result}}
   <tbody>
@@ -38,21 +42,22 @@
         </form>
       </td>
       <td>
-        <form action="/answers/{{this.id}}/delete" method="GET">
+        <form action="/answers/{{this.id}}/delete" method="POST">
           <button type="submit" onClick="return confirm('Are you sure you want to delete?')">Delete</button>
         </form>
       </td>
     </tr>
-</tbody>
-{{/each}}
-{{/if}}
+  </tbody>
+  {{/each}}
 </table>
-<p>{{result.0.questionid}}</p>
+<br>
     <form action="/answers/{{result.0.questionid}}/create/" method="GET">
     <button type="submit">Create New Answer</button>
     </form>
 
+{{/if}}
 
 <br>
+<a href='/questions/{{result.0.quizid}}/'>Click to go back</a>
 
-{{!-- <a href='/questions/{{quizid}}/'>Click to go back</a> --}}
+</div>

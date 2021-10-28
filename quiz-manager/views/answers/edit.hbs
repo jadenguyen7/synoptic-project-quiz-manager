@@ -1,0 +1,13 @@
+<div class="quizContent">
+
+<h1>Edit answer</h1>
+
+<form action="/answers/{{answer.0.questionid}}/{{answer.0.id}}/edit" method="POST">
+    <p>Answer you want to update: <b>{{answer.0.answer}}</b></p>
+
+    <input type="text" placeholder="Type new answer" name="answer">
+    <input type="text" placeholder="true / false" name="correct">
+    <button type="submit">Submit</button>
+</form>
+
+</div>

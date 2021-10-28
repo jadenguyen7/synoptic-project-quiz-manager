@@ -1,3 +1,5 @@
+<div class="quizContent">
+
 <h1>All {{quizTitle}} Questions</h1>
 
 {{#if isEdit}}
@@ -33,7 +35,6 @@
 </table>
 
 <br> 
-<p>{{questions.0.quizid}}</p>
 
     <form action="/questions/{{questions.0.quizid}}/create/" method="GET">
     <button type="submit">Create New Question</button>
@@ -78,3 +79,5 @@
 <br>
 
 <a href='/quizzes'>Click to go back</a>
+
+</div>

@@ -15,6 +15,13 @@ function getQuestionsByQuizId(quizID, onSuccess) {
     db.query(preparedSql, onSuccess);
 }
 
+function getSingleQuestionById(id, onSuccess) {
+    const sql = "SELECT * FROM `quizmanager`.`questions` WHERE `questions`.`id` = (?)";
+    const inserts = [id];
+    const preparedSql = mysql.format(sql, inserts);
+    db.query(preparedSql, onSuccess);
+}
+
 function createQuestion(questions, quizid, onSuccess) {
     const sql = "INSERT INTO `questions` (`question`, `quizid`) VALUES (?, ?)";
     const inserts = [questions, quizid];
@@ -29,16 +36,17 @@ function deleteQuestion(id, onSuccess) {
     db.query(preparedSql, onSuccess);
 }
 
-function editQuestion(input, onSuccess) {
-    const sql = "UPDATE `questions` SET `question`=(?) WHERE `id`=(?)";
-    const inserts = [input.question, input.id];
+function updateQuestion(question, id, onSuccess) {
+    const sql = "UPDATE `questions` SET `question`= (?)  WHERE `id`= (?)";
+    const inserts = [question, id];
     const preparedSql = mysql.format(sql, inserts);
     db.query(preparedSql, onSuccess);
 }
 
 
 //module.exports.getQuizTitleAndQuestionsUsingQuizId = getQuizTitleAndQuestionsUsingQuizId;
-module.exports.getQuestionsByQuizId = getQuestionsByQuizId;   
+module.exports.getQuestionsByQuizId = getQuestionsByQuizId;  
+module.exports.getSingleQuestionById = getSingleQuestionById;   
 module.exports.createQuestion = createQuestion;  
 module.exports.deleteQuestion = deleteQuestion;  
-module.exports.editQuestion = editQuestion;  
+module.exports.updateQuestion = updateQuestion;  

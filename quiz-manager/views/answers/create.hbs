@@ -1,10 +1,15 @@
+<div class="quizContent">
+
 <h1>Create a new answer</h1>
 
 <form action="/answers/{{answer.0.questionid}}/create" method="POST">
+    <p>Please write answer in the format <b>A. answer</b></p>
     <p>{{question}}</p>
-    <input type="text" placeholder="Answer ID" name="id" value={{answer.3.id}}>
     <input type="text" placeholder="New Answer" name="answer">
-    <input type="text" placeholder="Correct - True/False?" name="correct">
-    <input type="text" placeholder="quizid" name="quizid" value={{answer.0.questionid}} >
+    <input type="text" placeholder="true / false " name="correct">
     <button type="submit">Submit</button>
 </form>
+<br>
+<a href='/answers/{{answer.0.questionid}}'>Click to go back</a>
+
+</div>
