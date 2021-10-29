@@ -18,7 +18,7 @@ Assuming you have Node.js and NPM installed, in that location in Terminal run:
 ### IDE
 I have used Visual Studio Code as my IDE but you can use the IDE you feel most comfortable with.
 
-### Ports
+### Port
 
 This app is set to run on localhost 3000
 
@@ -38,12 +38,12 @@ AUTH_SECRET="<secret>" // secret for login security
 ```
 In the terminal run `node db` to check that it has connected to the database.
 
-On MySQL Workbench, click on the database icon - “Create a new schema” at the top and make the schema name `quiz-manager`.
+On MySQL Workbench, click on the database icon - “Create a new schema” at the top and make the schema name `quizmanager`.
 
 ### Add quiz data
 In the IDE terminal log into mysql using the command: `mysql -u root -p` and type in your mysql password.
 
-Then run the script in `appScripts.sql`.
+Then run the script in `appScripts.sql` following the steps.
 
 Once this is complete exit the database with `\q`.
 
