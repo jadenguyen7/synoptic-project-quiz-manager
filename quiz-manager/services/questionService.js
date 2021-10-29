@@ -1,13 +1,6 @@
 var mysql = require('mysql2');
 var db = require('../db');
 
-// function getQuizTitleAndQuestionsUsingQuizId(quizID, onSuccess) {
-//     const sql = "SELECT `quizzes`.`id`, `quizzes`.`title`, `questions`.`question`, `questions`.`quizid` FROM `quizzes` JOIN `questions` ON `questions`.`quizid` = `quizzes`.`id` WHERE `quizzes`.`id` = (?)";
-//     const inserts = [quizID];
-//     const preparedSql = mysql.format(sql, inserts);
-//     db.query(preparedSql, onSuccess);
-// }
-
 function getQuestionsByQuizId(quizID, onSuccess) {
     const sql = "SELECT `questions`.`id`, `questions`.`question`, `questions`.`quizid` FROM `questions` WHERE `questions`.`quizid` = (?)";
     const inserts = [quizID];
@@ -43,8 +36,6 @@ function updateQuestion(question, id, onSuccess) {
     db.query(preparedSql, onSuccess);
 }
 
-
-//module.exports.getQuizTitleAndQuestionsUsingQuizId = getQuizTitleAndQuestionsUsingQuizId;
 module.exports.getQuestionsByQuizId = getQuestionsByQuizId;  
 module.exports.getSingleQuestionById = getSingleQuestionById;   
 module.exports.createQuestion = createQuestion;  

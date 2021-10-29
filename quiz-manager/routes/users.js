@@ -22,7 +22,7 @@ router.post('/login', function(req, res, next) {
           username: user.username
         }
       },
-      // Your secret, e.g. here set by environment variable
+
       process.env.AUTH_SECRET);
       
       res.cookie('token', token);

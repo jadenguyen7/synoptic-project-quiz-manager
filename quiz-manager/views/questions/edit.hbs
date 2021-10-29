@@ -4,9 +4,7 @@
 
 <form action="/questions/{{question.0.quizid}}/{{question.0.id}}/edit" method="POST">
     <p>Question you want to update: <b>{{question.0.question}}</b></p>
-
     <input type="text" placeholder="New Question" name="question">
-    {{!-- <input type="text" placeholder="ID" name="id" value={{question.0.id}} > --}}
     <button type="submit">Submit</button>
 </form>
 

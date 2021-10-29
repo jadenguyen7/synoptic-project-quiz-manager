@@ -20,7 +20,7 @@ function validateLogin(user, onSuccess) {
     var sql = "SELECT * FROM `users` WHERE username = ?";
     var inserts = [user.username];
     var preparedSql = mysql.format(sql, inserts);
-    // React to query
+
     function onFindingUser(result){
         if (!result || result.length != 1) {
             onSuccess(false, null);
@@ -38,13 +38,12 @@ function findUser(username, onSuccess) {
     var inserts = [username];
     var preparedSql = mysql.format(sql, inserts);
 
-    // React to query
     function onResult(result) {
         console.log('This is the result', result)
         if (result && result.length > 0) {
             onSuccess(null, result[0])
         }
-        // else onSuccess("No such user", null)
+
         else onSuccess("No such user", null)
     };
     db.query(preparedSql, onResult);
