@@ -7,6 +7,10 @@ const questionService = require("../services/questionService");
 //get questions for quiz
 router.get('/:id', passport.authenticate('jwt', { session: false }), function(req, res, next) {
     function onSuccess(sqlResult) {
+        if (!sqlResult) {
+            res.render('error', { message: 'Error getting questions', error: {title: 'Error', message: ''} });
+            return;
+        } 
         res.render('questions/index', {
             questions: sqlResult,
             isRestricted: req.user.role === "restricted",
@@ -30,6 +34,10 @@ router.get('/:quizid/create', passport.authenticate('jwt', { session: false }), 
 });
 
 router.post('/:quizid/create', passport.authenticate('jwt', { session: false }), editAccess, function(req, res, next) {
+    if (req.body.title == "") {
+        res.render('error', { message: 'Input can not be empty', error: {title: 'Error', message: ''} });
+        return;
+      } 
     function onSuccess() {
         res.redirect(`/questions/${req.params.quizid}`);
     }
@@ -55,6 +63,10 @@ router.get('/:id/edit', passport.authenticate('jwt', { session: false }), editAc
 });
 
 router.post('/:quizid/:id/edit', passport.authenticate('jwt', { session: false }), editAccess, function(req, res, next) {
+    if (req.body.question === "") {
+        res.render('error', { message: 'Input can not be empty', error: {title: 'Error', message: ''} });
+        return;
+      } 
     function onSuccess() {
         res.redirect(`/questions/${req.params.quizid}`);
     }

@@ -10,22 +10,6 @@
     <th>Question ID</th>
   </thead>
 
-{{#if isView}}
-
-  {{#each result}}
-  <tbody>
-    <tr>
-      <td>{{this.id}}.</td>
-      <td>{{this.question}}</td>
-      <td>{{this.answer}}</td>
-      <td>{{this.correct}}</td>
-      <td>{{this.questionid}}</td>
-    </tr>
-  </tbody>
-{{/each}}
-
-{{/if}}
-
 {{#if isEdit}}
 
   {{#each result}}
@@ -55,6 +39,23 @@
     <button type="submit">Create New Answer</button>
     </form>
 
+{{/if}}
+
+
+{{#if isView}}
+
+  {{#each result}}
+  <tbody>
+    <tr>
+      <td>{{this.id}}.</td>
+      <td>{{this.question}}</td>
+      <td>{{this.answer}}</td>
+      <td>{{this.correct}}</td>
+      <td>{{this.questionid}}</td>
+    </tr>
+  </tbody>
+{{/each}}
+<table>
 {{/if}}
 
 <br>

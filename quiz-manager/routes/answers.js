@@ -33,6 +33,10 @@ router.get('/:questionid/create', passport.authenticate('jwt', { session: false 
 });
 
 router.post('/:questionid/create', passport.authenticate('jwt', { session: false }), editAccess, function(req, res, next) {
+    if (req.body.answer === '' || req.body.correct === '') {
+        res.render('error', { message: 'Input can not be empty', error: {title: 'Error', message: ''} });
+        return;
+      } 
     function onSuccess() {
         res.redirect(`/answers/${req.params.questionid}`);
     }
@@ -59,6 +63,10 @@ router.get('/:id/edit', passport.authenticate('jwt', { session: false }), editAc
 });
 
 router.post('/:questionid/:id/edit', passport.authenticate('jwt', { session: false }), editAccess, function(req, res, next) {
+    if (req.body.answer === '' || req.body.correct === '') {
+        res.render('error', { message: 'Input can not be empty', error: {title: 'Error', message: ''} });
+        return;
+      } 
     function onSuccess() {
         res.redirect(`/answers/${req.params.questionid}`);
     }

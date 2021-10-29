@@ -7,6 +7,10 @@ const quizService = require("../services/quizService");
 // get all quizzes
   router.get('/', passport.authenticate('jwt', { session: false }), function(req, res, next) {
     function onSuccess(sqlResult) {
+        if (!sqlResult) {
+            res.render('error', { message: 'Error getting quizzes', error: {title: 'Error', message: ''} });
+            return;
+          } 
         res.render('quizzes/index', {
             quizzes: sqlResult,
             isEdit: req.user.role === "edit"
@@ -22,7 +26,11 @@ router.get('/create', passport.authenticate('jwt', { session: false }), editAcce
 });
 
 router.post('/create', passport.authenticate('jwt', { session: false }), editAccess, function(req, res, next) {
-    function onSuccess() {
+    if (req.body.title == "") {
+        res.render('error', { message: 'Input can not be empty', error: {title: 'Error', message: ''} });
+        return;
+      } 
+    function onSuccess(sqlResult) {
         res.redirect('/quizzes');
     }
     quizService.createQuiz(req.body, onSuccess);

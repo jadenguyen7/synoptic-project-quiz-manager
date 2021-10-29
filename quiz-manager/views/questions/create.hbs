@@ -3,9 +3,12 @@
 <h1>Create a new question</h1>
 
 <form action="/questions/{{questions.0.quizid}}/create" method="POST">
+    {{!-- <p>Create a new queston for quiz {{questions.0.}}</p> --}}
     <input type="text" placeholder="Type in new question" name="title">
-    {{!-- <input type="text" placeholder="quizid" value={{questions.0.quizid}} > --}}
     <button type="submit">Submit</button>
 </form>
+<br> 
+
+<a href='/questions/{{questions.0.quizid}}/'>Click to go back</a>
 
 </div>
